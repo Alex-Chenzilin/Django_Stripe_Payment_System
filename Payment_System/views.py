@@ -30,23 +30,21 @@ def create_checkout_session(request):
             # [payment_intent_data] - capture the payment later
             # [customer_email] - prefill the email input in the form
             # For full details see https://stripe.com/docs/api/checkout/sessions/create
-
             # ?session_id={CHECKOUT_SESSION_ID} means the redirect will have the session ID set as a query param
             checkout_session = stripe.checkout.Session.create(
-                success_url=domain_url + 'success?session_id={CHECKOUT_SESSION_ID}',
-                cancel_url=domain_url + 'cancelled/',
+                success_url=domain_url + '123',
+                cancel_url=domain_url + '465',
                 payment_method_types=['card'],
                 mode='payment',
                 line_items=[
                     {
-                        'name': 'Bitreum',
-                        'quantity': 1,
-                        'currency': 'gbp',
-                        'amount': '1500',
+                    'price': 'price_1LLSQ6HBvJLU5gKi3F1gaMnq',
+                    'quantity': 1,
                     }
                 ]
             )
-            return JsonResponse({'sessionId': checkout_session['id']})
+            The_ID = {'sessionId': checkout_session['id']}
+            return JsonResponse(The_ID, safe = False)
         except Exception as e:
             return JsonResponse({'error': str(e)})
 
